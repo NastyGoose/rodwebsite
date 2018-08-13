@@ -1,0 +1,222 @@
+@import "./config.scss";
+header {
+  position: relative;
+  top: 0;
+
+  display: block;
+  width: 100%;
+  background: black;
+  color: wheat;
+  height: 90px;
+
+  .logo {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    @include translateY(-50%);
+  }
+
+  nav,
+  nav ul,
+  nav ul li {
+    margin: 0;
+    padding: 0;
+  }
+
+  nav {
+    position: absolute;
+    top: 50%; right: 15px;
+    @include translateY(-50%);
+
+    ul li {
+      list-style-type: none;
+      display: inline-block;
+      margin-right: 10px;
+
+    &.last {
+      margin: 0;
+    }
+
+    a{
+      font-size: 19px;
+      line-height: normal;
+      color: wheat;
+     }
+   }
+  }
+}
+
+body {
+  position: relative;
+  background: lighten(wheat, 8%);
+  color: darken(grey, 23%);
+
+  ::selection {
+    background: white;
+  }
+
+
+  .hero-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    width: 100vw;
+    height: 150vh; // this should be dynamic, right now it's fixed based on a min max offset
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-children {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    strong {
+      color: chocolate;
+    }
+
+  }
+
+  .parallaxBanner {
+    position: relative;
+    color: white;
+    font-family: 'Futura', 'Helvetica', sans-serif;
+    font-weight: normal;
+  }
+
+  h2 {
+    font-size: 40px;
+    text-align: center;
+
+    strong {
+      color: chocolate;
+    }
+
+  }
+
+  .container-fluid {
+
+    text-align: center;
+    font-size: xx-large;
+
+    h1 {
+      margin-top: 30px;
+      font-size: 40px;
+    }
+
+    div {
+      margin-top: 6%;
+      height: fit-content;
+      display: block;
+
+      mark {
+        &::selection {
+          background: transparent;
+        }
+        color: wheat;
+        background: transparentize(black, 0.3);
+        @include transition(0.4s ease-in-out);
+        cursor: pointer;
+
+        &:hover {
+          &::selection {
+            background: white;
+            @include transition(0.4s ease-in-out)
+          }
+          color: darken(grey, 23%);
+          background: lighten(wheat, 8%);
+          @include transition(0.4s ease-in-out)
+        }
+      }
+
+      .firstLine {
+        text-align: left;
+
+      }
+      .secondLine {
+        text-align: center;
+      }
+      .thirdLine {
+        text-align: right;
+      }
+    }
+  }
+  img {
+   -webkit-filter: blur(2px);
+    filter: blur(2px);
+  }
+
+  .stickyPanel {
+
+    position: sticky;
+    position: -webkit-sticky;
+    margin-bottom: -20px;
+    bottom: -2px;
+    width: 100%;
+    display: inline-flex;
+    background-color: transparentize(black, 0.25);
+    color: wheat;
+    border-bottom: 2px solid transparentize(wheat, 0.5) ;
+
+
+    .Icons {
+      margin: 0 auto;
+      padding-bottom: 9px;
+      display: inline-flex;
+      justify-content: space-between;
+      width: 300px;
+
+
+      a {
+        list-style: none;
+        margin-top: 7px;
+        left: 0;
+        @include transition(.4s ease-in-out);
+
+        .social-svg {
+
+          background: transparent;
+          @include transition(.4s ease-in-out);
+
+          &:hover {
+            background: chocolate;
+            @include transition(.4s ease-in-out)
+          }
+        }
+      }
+    }
+  }
+
+
+footer {
+  position: relative;
+  bottom: 0;
+  display: block;
+  height: 200px;
+  width: 100%;
+  background-color: transparentize(black, 0.25);
+  color: wheat;
+
+
+     .infoStuff {
+       display: block;
+       position: relative;
+       top: 50%;
+       margin-right: 15px;
+       text-align: end;
+           h1 {
+               font-size: 25px;
+              }
+
+    }
+  }
+}
