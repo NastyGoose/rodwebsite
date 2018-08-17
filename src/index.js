@@ -1,10 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import bootstrap from  'react-bootstrap';
-import FormContainer from "../src/components/container/FormContainer";
-
-
+import App from './App.js';
+import bootstrap from 'react-bootstrap';
 
 import registerServiceWorker from './registerServiceWorker';
 

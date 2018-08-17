@@ -1,76 +1,91 @@
-import React, { Component } from 'react';
-import { Scrollbars } from 'react-custom-scrollbars';
+import React, { PureComponent } from 'react';
 import {
-    BrowserRouter as Router,
-    Route,
-    Link
+  BrowserRouter as Router,
+  Route
 } from 'react-router-dom';
-//css
+
+// css
 import './assets/css/default.min.css';
+import './assets/scss/default.scss';
 
-//components
-import Header from "./components/headerComponent/header";
-import Footer from "./components/footerComponent/footer";
-import Homepage from "./components/pages/homePage";
-import Products from "./components/pages/products";
-import StickyPanel from "./components/footerComponent/stickyPanel";
-import TweenLite from "gsap/TweenLite";
-import {Power2} from "gsap";
+// components
+import Header from './components/headerComponent/header';
+import Footer from './components/footerComponent/footer';
+import Homepage from './components/pages/homePage';
+import Products from './components/pages/products';
+import StickyPanel from './components/footerComponent/stickyPanel';
+import Example from './components/pages/testPage';
 
+// animations
+import TweenLite from 'gsap/TweenLite';
+import {Power2} from 'gsap';
 
-const run = () => {
-    const root = document.createElement('div');
-    document.body.appendChild(root);
+// redux
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import allReducers from './reducers/reducer';
 
-    const  scrollAnimation = { scrollTop: window.innerHeight };
+const store = createStore(allReducers);
+
+class App extends PureComponent {
+  constructor (props) {
+    super();
+    this.scrollToTop();
+  }
+
+  componentDidMount () {
+    document.title = 'Bart';
+  }
+
+  scrollToTop () {
+    const scrollAnimation = { scrollTop: window.innerHeight };
     const scrollTop = 0;
 
     const tween = TweenLite.to(scrollAnimation, 2, {
-        scrollTop: scrollTop,
-        ease: Power2.easeInOut,
-        onUpdate: () => {
-            window.scrollTo(0, scrollAnimation.scrollTop);
-        }
+      scrollTop: scrollTop,
+      ease: Power2.easeInOut,
+      onUpdate: () => {
+        window.scrollTo(0, scrollAnimation.scrollTop);
+      }
     });
 
-    window.addEventListener('mousewheel', function mouseHandler() {
-        tween.kill();
-        window.removeEventListener('mousewheel', mouseHandler, false);
+    window.addEventListener('mousewheel', function mouseHandler () {
+      tween.kill();
+      window.removeEventListener('mousewheel', mouseHandler, false);
     }, false);
-};
+  };
 
-
-
-class App extends Component {
-  constructor(props)
-  {
-      super();
+  scrollToContacts () {
+    this.contacts.scrollIntoView({ behavior: 'smooth' });
   }
-    render() {
+
+  render () {
     return (
 
-        <Router>
+      <Router>
 
-            <div className="App">
+        <div className='App'>
 
-                <Header />
+          <Header />
 
-                    <Route exact path='/' component={Homepage}/>
+          <Route exact path='/' component={Homepage} />
 
-                    <Route exact path='/Products' component={Products}/>
+          <Provider store={store}>
+            <Route exact path='/Products' component={Products} />
+          </Provider>
 
-                    <StickyPanel/>
+          <Route exact path='/Example' component={Example} />
 
-                <Footer/>
+          <StickyPanel />
 
-            </div>
+          <Footer ref={(ct) => { this.contacts = ct; }} />
 
-        </Router>
+        </div>
+
+      </Router>
 
     );
   }
 }
 
 export default App;
-
-run();

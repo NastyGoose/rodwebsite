@@ -9,7 +9,9 @@ header {
   color: wheat;
   height: 90px;
 
+
   .logo {
+    font-size: x-large;
     position: absolute;
     top: 50%;
     left: 15px;
@@ -51,10 +53,62 @@ body {
   background: lighten(wheat, 8%);
   color: darken(grey, 23%);
 
+
+  .card-body {
+    text-align: center;
+    background-color: #0c0801cc;
+    color: #fbeab8e3;
+    border-top: 0.5px dotted wheat;
+
+    .card-title {
+      font-size: 25px;
+      margin-top: 0;
+    }
+
+
+    .btn {
+      width: 175px;
+      color: wheat;
+      border-color: whitesmoke;
+
+      &:hover {
+        background-color: wheat;
+        color: #0c0801cc;
+      }
+    }
+
+  }
+
+
+  .reduxListItem {
+
+    .carousel-slide {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      height: 600px;
+
+      img {
+        width: 100%;
+        height: 600px;
+      }
+    }
+
+    list-style: none;
+    margin: 20px auto;
+  }
+
+
+  .card {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    height: 50%;
+  }
+
   ::selection {
     background: white;
   }
-
 
   .hero-container {
     position: relative;
@@ -82,6 +136,7 @@ body {
 
     strong {
       color: chocolate;
+      text-shadow: black;
     }
 
   }
@@ -125,7 +180,6 @@ body {
         color: wheat;
         background: transparentize(black, 0.3);
         @include transition(0.4s ease-in-out);
-        cursor: pointer;
 
         &:hover {
           &::selection {
@@ -138,21 +192,16 @@ body {
         }
       }
 
-      .firstLine {
-        text-align: left;
-
+         .firstLine {
+            text-align: left;
+       }
+         .secondLine {
+            text-align: center;
       }
-      .secondLine {
-        text-align: center;
-      }
-      .thirdLine {
-        text-align: right;
+         .thirdLine {
+            text-align: right;
       }
     }
-  }
-  img {
-   -webkit-filter: blur(2px);
-    filter: blur(2px);
   }
 
   .stickyPanel {
@@ -160,7 +209,7 @@ body {
     position: sticky;
     position: -webkit-sticky;
     margin-bottom: -20px;
-    bottom: -2px;
+    bottom: -0.5%;
     width: 100%;
     display: inline-flex;
     background-color: transparentize(black, 0.25);
