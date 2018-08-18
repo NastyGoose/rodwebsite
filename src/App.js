@@ -19,6 +19,7 @@ import Example from './components/pages/testPage';
 // animations
 import TweenLite from 'gsap/TweenLite';
 import {Power2} from 'gsap';
+import { Zoom } from 'react-preloaders';
 
 // redux
 import { Provider } from 'react-redux';
@@ -30,18 +31,21 @@ const store = createStore(allReducers);
 class App extends PureComponent {
   constructor (props) {
     super();
-    this.scrollToTop();
+    this.state = {
+      delay: 4000
+    };
   }
 
   componentDidMount () {
     document.title = 'Bart';
+    this.scrollToTop();
   }
 
   scrollToTop () {
-    const scrollAnimation = { scrollTop: window.innerHeight };
+    const scrollAnimation = { scrollTop: document.body.scrollHeight };
     const scrollTop = 0;
 
-    const tween = TweenLite.to(scrollAnimation, 2, {
+    const tween = TweenLite.to(scrollAnimation, 5, {
       scrollTop: scrollTop,
       ease: Power2.easeInOut,
       onUpdate: () => {
@@ -62,28 +66,32 @@ class App extends PureComponent {
   render () {
     return (
 
-      <Router>
+      <React.Fragment>
+        <Zoom
+          color={'#fffad3'}
+          bgColor={'rgb(0, 0, 0, .80)'}
+          time={this.state.delay}
+        />
+        <Router>
+          <div className='App'>
+            <Header />
 
-        <div className='App'>
+            <Route exact path='/' component={Homepage} />
 
-          <Header />
+            <Provider store={store}>
+              <Route exact path='/Products' component={Products} />
+            </Provider>
 
-          <Route exact path='/' component={Homepage} />
+            <Route exact path='/Example' component={Example} />
 
-          <Provider store={store}>
-            <Route exact path='/Products' component={Products} />
-          </Provider>
+            <StickyPanel />
 
-          <Route exact path='/Example' component={Example} />
+            <Footer ref={(ct) => { this.contacts = ct; }} />
 
-          <StickyPanel />
+          </div>
 
-          <Footer ref={(ct) => { this.contacts = ct; }} />
-
-        </div>
-
-      </Router>
-
+        </Router>
+      </React.Fragment>
     );
   }
 }

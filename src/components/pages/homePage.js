@@ -16,13 +16,11 @@ const Banner = (props) =>(
                 <main>
                     <nav />
                     <HeroBanner
-                        min={'-20%'}
+                         min={'-20%'}
                         max={'20%'}
                         image= {props.picture}
                     >
-                        <h1>
                         {props.text}
-                        </h1>
                     </HeroBanner>
                 </main>
             </ParallaxProvider>
@@ -50,7 +48,8 @@ class Homepage extends PureComponent {
             text: 'a good',
             magicWord: '',
             today: this.whatDayIsItToday(),
-            greetingsTime: this.whatTimeIsItNow()
+            greetingsTime: this.whatTimeIsItNow(),
+            previousWord: ''
         };
         this.writeText();
     }
@@ -80,9 +79,14 @@ class Homepage extends PureComponent {
     changeState = () => {
         const magicWords = ['a blessed', 'fun', 'a terrific', 'an awesome', 'a good', 'a neat', 'beautiful', 'a cool', 'a nice'];
         let statement;
-        let index = Math.floor(Math.random() * (magicWords.length));
-        statement = magicWords[index];
-        this.setState({text: statement});
+        do {
+            let index = Math.floor(Math.random() * (magicWords.length));
+            statement = magicWords[index];
+        } while (this.state.previousWord === statement);
+        this.setState({
+            text: statement,
+            previousWord: statement
+        });
         this.writeText();
      };
 
@@ -124,9 +128,12 @@ class Homepage extends PureComponent {
 
         const greetings =
             <h1>
-                {this.state.greetingsTime} we are
-                <strong style={
-                    {color: 'whitesmoke'}}> Bart. </strong>
+                {this.state.greetingsTime} we are <strong>
+                    <mark className='BartMarker'>Bart!</mark>
+            </strong>
+
+
+
 
 
             </h1>;
