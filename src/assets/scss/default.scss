@@ -217,7 +217,7 @@ body {
 
     position: sticky;
     position: -webkit-sticky;
-    margin-bottom: -20px;
+    margin-bottom: 0;
     bottom: -0.5%;
     width: 100%;
     display: inline-flex;
@@ -263,17 +263,33 @@ footer {
   width: 100%;
   background-color: transparentize(black, 0.25);
   color: wheat;
+  text-align: center;
 
+  .contactBtn {
+    border: 2px solid wheat;
+    font-size: 30px;
+    height: 60px;
+    width: 300px;
+    margin-top: 70px;
+    border-radius: 30px;
 
-     .infoStuff {
-       display: block;
-       position: relative;
-       top: 50%;
-       margin-right: 15px;
-       text-align: end;
-           h1 {
-               font-size: 25px;
-              }
+    &:focus {
+      outline: none !important;
+    }
+
+    &:hover {
+      border-color: antiquewhite;
+      @include transition(0.5s ease-in-out);
+      span {
+        color: antiquewhite;
+        @include transition(0.5s ease-in-out);
+      }
+    }
+
+    span {
+      color: wheat;
+      text-transform: none !important;
+    }
 
     }
   }

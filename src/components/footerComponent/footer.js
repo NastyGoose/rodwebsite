@@ -1,17 +1,25 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit
+  },
+  input: {
+    display: 'none'
+  }
+});
 
 // component
 class Footer extends PureComponent {
   render () {
     return (
       <footer>
-        <div className='infoStuff'>
-          <h1>
-              Adress:blahblahblah <br />
-              Telefon number:+blahblahblah <br />
-              Email:blahblahblah@blah.com
-          </h1>
-        </div>
+        <Button variant='outlined' className='contactBtn' href='mailto:Staaalker@tut.by'>
+              Contact us!
+        </Button>
       </footer>
     );
   }
