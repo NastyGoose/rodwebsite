@@ -4,6 +4,7 @@
   "description": "website for game presentation",
   "main": "gulpfile.js",
   "dependencies": {
+    "npm": "^6.4.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
