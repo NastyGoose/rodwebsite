@@ -12,7 +12,7 @@ class Header extends PureComponent {
     this.state = {
       collapse: false,
       status: 'Closed',
-      goTo: '/products',
+      goTo: '',
       active: true
     };
   }

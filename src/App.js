@@ -9,11 +9,11 @@ import './assets/css/default.min.css';
 import './assets/scss/default.scss';
 
 // components
-import Header from './components/headerComponent/header';
-import Footer from './components/footerComponent/footer';
+import Header from './components/headerComponent/header.jsx';
+import Footer from './components/footerComponent/footer.jsx';
 import Homepage from './components/pages/Homepage';
 import Products from './components/pages/Products';
-import StickyPanel from './components/footerComponent/stickyPanel';
+import StickyPanel from './components/footerComponent/stickyPanel.jsx';
 import Example from './components/pages/Testpage';
 
 // animations
