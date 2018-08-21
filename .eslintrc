@@ -1,6 +1,7 @@
 {
   "extends": ["standard", "standard-react"],
   "rules": {
-    "semi": [1, "always"]
+    "semi": [1, "always"],
+    "fix": "true"
   }
 }

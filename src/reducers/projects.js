@@ -16,19 +16,19 @@ export default function () {
       desc: 'An historical game about World War II and events that took place in Belarus in particular.',
       items: [
         {
-          src: require('../../assets/images/game1.png'),
+          src: require('../assets/images/game1.png'),
           altText: 'Slide 1',
           caption: '',
           header: 'Main Menu'
         },
         {
-          src: require('../../assets/images/game2.png'),
+          src: require('../assets/images/game2.png'),
           altText: 'Slide 2',
           caption: '',
           header: 'War Map'
         },
         {
-          src: require('../../assets/images/game3.png'),
+          src: require('../assets/images/game3.png'),
           altText: 'Slide 3',
           caption: '',
           header: 'RTS Gameplay'
@@ -49,19 +49,19 @@ export default function () {
       desc: 'Simple website',
       items: [
         {
-          src: require('../../assets/images/site1.png'),
+          src: require('../assets/images/site1.png'),
           altText: 'Slide 1',
           caption: '',
           header: 'Some crappy site'
         },
         {
-          src: require('../../assets/images/site2.png'),
+          src: require('../assets/images/site2.png'),
           altText: 'Slide 2',
           caption: '',
           header: 'It still looks bad'
         },
         {
-          src: require('../../assets/images/site3.jpg'),
+          src: require('../assets/images/site3.jpg'),
           altText: 'Slide 3',
           caption: '',
           header: 'Beginning'

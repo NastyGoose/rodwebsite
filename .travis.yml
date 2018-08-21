@@ -1,3 +1,15 @@
 language: node_js
 node_js:
 - "stable"
+cache:
+  directories:
+  - node_modules
+install:
+- npm install -g codecov
+script:
+- npm test
+- npm run build
+- istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
+- codecov
+on:
+  branch: master
