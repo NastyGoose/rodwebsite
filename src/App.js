@@ -11,10 +11,10 @@ import './assets/scss/default.scss';
 // components
 import Header from './components/headerComponent/header';
 import Footer from './components/footerComponent/footer';
-import Homepage from './components/pages/homePage';
-import Products from './components/pages/products';
+import Homepage from './components/pages/Homepage';
+import Products from './components/pages/Products';
 import StickyPanel from './components/footerComponent/stickyPanel';
-import Example from './components/pages/testPage';
+import Example from './components/pages/Testpage';
 
 // animations
 import TweenLite from 'gsap/TweenLite';
@@ -32,18 +32,21 @@ class App extends PureComponent {
   constructor (props) {
     super();
     this.state = {
-      delay: 4000
+      delay: 4000,
+      loading: true
     };
+    // setTimeout(() => this.setState({ loading: false}), this.state.delay);
   }
 
   componentDidMount () {
-    document.title = 'Bart';
+    // document.title = 'Bart';
     this.scrollToTop();
   }
 
   scrollToTop () {
     const scrollAnimation = { scrollTop: document.body.scrollHeight };
     const scrollTop = 0;
+    const loading = this.state.loading;
 
     const tween = TweenLite.to(scrollAnimation, 5, {
       scrollTop: scrollTop,
@@ -52,11 +55,12 @@ class App extends PureComponent {
         window.scrollTo(0, scrollAnimation.scrollTop);
       }
     });
-
-    window.addEventListener('mousewheel', function mouseHandler () {
-      tween.kill();
-      window.removeEventListener('mousewheel', mouseHandler, false);
-    }, false);
+    if (!loading) {
+      window.addEventListener('mousewheel', function mouseHandler () {
+        tween.kill();
+        window.removeEventListener('mousewheel', mouseHandler, false);
+      }, false);
+    }
   };
 
   scrollToContacts () {

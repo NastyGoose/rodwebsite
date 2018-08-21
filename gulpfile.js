@@ -95,7 +95,7 @@ gulp.task('compile_scss', function () {
     }).on('error', sass.logError))
     .pipe(autoprefix('last 2 versions'))
     .pipe(minifyCSS())
-    .pipe(rename({suffix: '.min' }))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('./'))
     .pipe(changed(sass_dest))
     .pipe(gulp.dest(sass_dest));

@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { flatten, times } from 'lodash';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
 //component
 
@@ -104,7 +103,6 @@ class Homepage extends PureComponent {
     writeText = () => {
     this.interval = setInterval(() => {
         if(this.state.text) {
-            console.log('started greetings');
         let word = this.state.text;
         let letters = word.split('');
         this.setState({magicWord: this.state.magicWord + letters.shift()});
@@ -145,7 +143,7 @@ class Homepage extends PureComponent {
                 <div className='firstSpeech'>
                 <p className='firstLine'>Our <mark>shiny company</mark> specialize on making small projects.</p>
                 <br/>
-                    <p className='secondLine'>For now we already made one baggy RTS <mark>game</mark> and currently we are trying to make it better.</p>
+                    <p className='secondLine'>For now we already made one baggy RTS <mark>game</mark> and currently we are trying to make <br/>it better.</p>
                 <br/>
                     <p className='thirdLine'>We really appreciate <mark>you</mark> being on this website and hope you're liking it!</p>
                 </div>
