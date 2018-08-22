@@ -3,28 +3,20 @@ import { connect } from 'react-redux';
 import { Card, CardText, CardBody,
   CardTitle, Button, UncontrolledCarousel} from 'reactstrap';
 import Modal from 'react-responsive-modal';
+import PropTypes from "prop-types";
+import { changeState } from '../../actions/modalStatelAction';
 
-// <Button outline color='warning' onClick={() => this.props.select(project)} key={project.id}>Learn more</Button>
 class Products extends PureComponent {
-   export const modalState = () => {
-       const modalState = this.state.open;
-    };
-
-    state = {
-        open: false,
-        text: ''
-    };
 
     onOpenModal = (addInfo) => {
-        this.setState({ open: true , text: addInfo});
+        this.props.changeState(addInfo);
     };
 
     onCloseModal = () => {
-        this.setState({ open: false });
+        this.props.changeState('');
     };
 
   get list () {
-    // eslint-disable-next-line react/prop-types
     return this.props.projects.map((project) => {
       return (
         <li
@@ -50,15 +42,14 @@ class Products extends PureComponent {
   }
 
   render () {
-      const { open } = this.state;
     return (
       <div>
           <Modal
-              open={open}
+              open={this.props.open}
               onClose={this.onCloseModal}
               center
           >
-              {this.state.text}
+              {this.props.text}
           </Modal>
           <ul className='reduxList'>
                   {this.list}
@@ -70,8 +61,15 @@ class Products extends PureComponent {
 
 function mapStateToProps (state) {
   return {
-    projects: state.projects
+    projects: state.projects,
+    open: state.actions.isOpen,
+    text: state.actions.text
   };
 }
 
-export default connect(mapStateToProps)(Products);
+Products.propTypes = {
+    text: PropTypes.string.isRequired,
+    changeState: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps, { changeState })(Products);

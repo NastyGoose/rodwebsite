@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import projectsReducer from './projects';
-import productsReducer from '../components/pages/Products';
+import actionHandler from '../actions/actionHandler';
 
 const allReducers = combineReducers({
   projects: projectsReducer,
-  products: productsReducer
+  actions: actionHandler
 });
 
 export default allReducers;

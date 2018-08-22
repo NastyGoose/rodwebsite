@@ -14,6 +14,7 @@ header {
   .logo {
     font-size: x-large;
     position: absolute;
+    margin-left: 10px;
     top: 50%;
     left: 15px;
     @include translateY(-50%);
@@ -57,17 +58,18 @@ header {
 
 body {
   position: relative;
-
+  overflow: visible !important;
   background: lighten(wheat, 8%);
   color: darken(grey, 23%);
 
-  
-  .navList, .navList-active {
+
+  .navList, .navList-disabled {
     position: fixed;
     position: -ms-device-fixed;
     display: block;
     width: 100px;
     margin-left: 10px;
+    margin-top: 15%;
     overflow: visible;
     z-index: 1;
 
@@ -89,13 +91,18 @@ body {
     }
 
 
-  .navList-active {
+  .navList-disabled {
     color:transparent;
     @include transition(.3s ease-in-out);
     li {
       a {
+        cursor: default;
         color:transparent;
         @include transition(.3s ease-in-out);
+        &:hover {
+          color: transparent;
+          @include transition(.3s ease-in-out);
+        }
       }
   }
   }
@@ -293,11 +300,11 @@ body {
         .social-svg {
 
           background: transparent;
-          @include transition(.4s ease-in-out);
+          @include transition(.8s ease-in-out);
 
           &:hover {
             background: darkorange;
-            @include transition(.4s ease-in-out)
+            @include transition(.2s ease-in-out)
           }
         }
       }

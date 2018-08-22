@@ -30,7 +30,7 @@ gulp.task('webpack', function () {
       module: {
         rules: [
           {
-            test: /\.jsx?$/i,
+            test: /\.(jsx|js)$/i,
             exclude: /node_modules/,
             loader: 'babel-loader',
             query: {
@@ -103,7 +103,7 @@ gulp.task('compile_scss', function () {
 
 gulp.task('watch', function () {
   gulp.watch(sass_src, ['compile_scss']);
-  gulp.watch('./src/components/**/*.js', ['webpack']);
+  gulp.watch('./src/**/*.{js,jsx}', ['webpack']);
 });
 
 gulp.task('default', ['watch']);

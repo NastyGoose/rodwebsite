@@ -11,10 +11,11 @@ import './assets/scss/default.scss';
 // components
 import Header from './components/headerComponent/header.jsx';
 import Footer from './components/footerComponent/footer.jsx';
-import Homepage from './components/pages/Homepage';
-import Products from './components/pages/Products';
-import StickyPanel from './components/footerComponent/stickyPanel.jsx';
-import Example from './components/pages/Testpage';
+import Homepage from './components/pages/Homepage.jsx';
+import Products from './components/pages/Products.jsx';
+import StickyPanel from './components/utilComponents/stickyPanel.jsx';
+import Sidebar from './components/utilComponents/sidebar.jsx';
+import Example from './components/pages/Testpage.jsx';
 
 // animations
 import TweenLite from 'gsap/TweenLite';
@@ -23,10 +24,9 @@ import { Zoom } from 'react-preloaders';
 
 // redux
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import allReducers from './reducers/reducer';
+import configureStore from './components/configureStore';
 
-const store = createStore(allReducers);
+const store = configureStore();
 
 class App extends PureComponent {
   constructor (props) {
@@ -35,11 +35,9 @@ class App extends PureComponent {
       delay: 4000,
       loading: true
     };
-    // setTimeout(() => this.setState({ loading: false}), this.state.delay);
   }
 
   componentDidMount () {
-    // document.title = 'Bart';
     this.scrollToTop();
   }
 
@@ -63,41 +61,54 @@ class App extends PureComponent {
     }
   };
 
-  scrollToContacts () {
-    this.contacts.scrollIntoView({ behavior: 'smooth' });
-  }
-
   render () {
     return (
+      <Provider store={store}>
+        <body>
 
-      <React.Fragment>
-        <Zoom
-          color={'#fffad3'}
-          bgColor={'rgb(0, 0, 0, .80)'}
-          time={this.state.delay}
-        />
-        <Router>
-          <div className='App'>
-            <Header />
+          <Zoom
+            color={'#fffad3'}
+            bgColor={'rgb(0, 0, 0, .80)'}
+            time={this.state.delay}
+          />
 
-            <Route exact path='/' component={Homepage} />
+          <Router>
+            <div className='App'>
 
-            <Provider store={store}>
-              <Route exact path='/Products' component={Products} />
-            </Provider>
+              <Header />
 
-            <Route exact path='/Example' component={Example} />
+              <Sidebar />
 
-            <StickyPanel />
+              <Route path='/(home|)/'
+                component={Homepage}
+              />
+              <Route
+                exact path='/Homepage'
+                component={Homepage}
+              />
 
-            <Footer ref={(ct) => { this.contacts = ct; }} />
+              <Route
+                exact path='/Products'
+                component={Products}
+              />
 
-          </div>
+              <Route
+                exact path='/Example'
+                component={Example}
+              />
 
-        </Router>
-      </React.Fragment>
+              <StickyPanel />
+
+              <Footer ref={(ct) => { this.contacts = ct; }} />
+
+            </div>
+
+          </Router>
+
+        </body>
+      </Provider>
     );
   }
 }
 
-export default App;
+export default (App);
