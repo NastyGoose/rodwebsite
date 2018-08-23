@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
+import Time from '../utilComponents/utilFunctions';
 //component
 
-    const ipsum = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n' +
+const ipsum = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n' +
         '\n';
 
 const Banner = (props) =>(
@@ -38,39 +39,17 @@ const HeroBanner = ({ image, min, max, children }) => (
 
 class Homepage extends PureComponent {
 
-    constructor(props) {
+    constructor() {
         super();
         this.state = {
             text: 'a good',
             magicWord: '',
-            today: this.whatDayIsItToday(),
-            greetingsTime: this.whatTimeIsItNow(),
+            today: Time.whatDayIsItToday(),
+            greetingsTime: Time.whatTimeIsItNow(),
             previousWord: ''
         };
         this.writeText();
     }
-
-    whatTimeIsItNow = () => {
-        const time = new Date().getHours();
-           if (time >= 0 && time <= 5) return ('Good evening,');
-           if (time >= 6 && time <= 11) return ('Good morning,');
-           if (time >= 12 && time <= 16) return ('Good afternoon,');
-           if (time >= 17 && time <= 23) return ('Good evening,');
-    };
-
-    whatDayIsItToday = () => {
-        let today = new Date().getDay();
-        switch (today) {
-            case 1: return('monday');
-            case 2: return('tuesday');
-            case 3: return('wednesday');
-            case 4: return('thursday');
-            case 5: return('friday');
-            case 6: return('saturday');
-            case 0: return('sunday');
-        }
-    };
-
 
     changeState = () => {
         const magicWords = ['a blessed', 'fun', 'a terrific', 'an awesome', 'a good', 'a neat', 'beautiful', 'a cool', 'a nice'];
@@ -126,30 +105,39 @@ class Homepage extends PureComponent {
                 {this.state.greetingsTime} we are <strong>
                     <mark className='BartMarker'>Bart!</mark>
             </strong>
-
-
-
-
-
             </h1>;
 
         return (
     <div>
-        <Banner text={greetings} picture= {require('../../assets/images/night-landscape.jpg')}/>
+        <Banner
+            text={greetings}
+            picture= {require('../../assets/images/night-landscape.jpg')}
+        />
             <div
                 className='container-fluid'
                 style={{ height: '700px' }}>
-                <h1>About us:</h1>
+                <h1>
+                    About us:
+                </h1>
                 <div className='firstSpeech'>
-                <p className='firstLine'>Our <mark>shiny company</mark> specialize on making small projects.</p>
+                    <p className='firstLine'>
+                        Our <mark>shiny company</mark> specialize on making small projects.
+                    </p>
                 <br/>
-                    <p className='secondLine'>For now we already made one baggy RTS <mark>game</mark> and currently we are trying to make <br/>it better.</p>
+                    <p className='secondLine'>
+                        For now we already made one baggy RTS <mark>game</mark> and currently we are trying to make <br/>it better.
+                    </p>
                 <br/>
-                    <p className='thirdLine'>We really appreciate <mark>you</mark> being on this website and hope you're liking it!</p>
+                    <p className='thirdLine'>
+                        We really appreciate <mark>you</mark> being on this website and hope you're liking it!
+                    </p>
                 </div>
             </div>
 
-        <Banner text={telling} picture = {require('../../assets/images/landscape.jpg')}/>
+        <Banner
+            text={telling}
+            picture = {require('../../assets/images/landscape.jpg')}
+        />
 
         <div
             className='container-fluid'
@@ -158,7 +146,9 @@ class Homepage extends PureComponent {
                 <p className='secondLine'>{ipsum}</p>
             </div>
             <div className='magicText'>
-                <h1>Have <strong style = {{color: 'chocolate'}}>{this.state.magicWord}</strong> {this.state.today}!</h1>
+                <h1>
+                    Have <strong style = {{color: 'chocolate'}}>{this.state.magicWord}</strong> {this.state.today}!
+                </h1>
             </div>
         </div>
     </div>

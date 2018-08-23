@@ -14,7 +14,6 @@ header {
   .logo {
     font-size: x-large;
     position: absolute;
-    margin-left: 10px;
     top: 50%;
     left: 15px;
     @include translateY(-50%);

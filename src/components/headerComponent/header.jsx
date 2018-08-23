@@ -22,11 +22,9 @@ class Header extends PureComponent {
       <header>
         <Redirect to={this.path} />
         <div className='logo'>
-            <FontAwesomeIcon
-                style={{fontSize: '45px'}}
-                onClick={this.toggle}
-                icon={faHeart}
-            />
+            <div className='logo' >
+                <a onClick={this.toggle}>LOGO</a>
+            </div>
         </div>
         <nav>
           <ul>
