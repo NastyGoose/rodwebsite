@@ -5,25 +5,21 @@ const STATUS = {
   NORMAL: 'normal'
 };
 
-export default class Link extends React.Component {
+export class Link extends React.Component {
   constructor (props) {
     super(props);
-
-    this._onMouseEnter = this._onMouseEnter.bind(this);
-    this._onMouseLeave = this._onMouseLeave.bind(this);
-
     this.state = {
-      class: STATUS.NORMAL
+      class: STATUS.NORMAL,
     };
   }
 
-  _onMouseEnter () {
+  _onMouseEnter = () => {
     this.setState({class: STATUS.HOVERED});
-  }
+  };
 
-  _onMouseLeave () {
+  _onMouseLeave = () => {
     this.setState({class: STATUS.NORMAL});
-  }
+  };
 
   render () {
     return (
@@ -37,4 +33,30 @@ export default class Link extends React.Component {
       </a>
     );
   }
+}
+
+export class Checkbox extends React.Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            isChecked: false
+        };
+    }
+
+    onChange = () => {
+        this.setState(prevState => ({isChecked: !prevState.isChecked}));
+    };
+
+    render () {
+        return (
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={this.state.isChecked}
+                        onChange={this.onChange}
+                    />
+                    {this.state.isChecked ? this.props.labelOn : this.props.labelOff}
+                </label>
+        );
+    }
 }
