@@ -4,8 +4,7 @@ import Redirect from 'react-router-dom/es/Redirect';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { changeState } from '../../actions/sidebarStateAction';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { Overlay, Tooltip } from 'react-bootstrap';
 
 // component
 class Header extends PureComponent {
@@ -15,19 +14,29 @@ class Header extends PureComponent {
 
   toggle = () => {
     this.props.changeState(!this.props.showSidebar);
+    console.log(this.overlay);
   };
 
   render () {
+
     return (
       <header>
         <Redirect to={this.path} />
-        <div className='logo'>
-            <FontAwesomeIcon
-                style={{fontSize: '45px'}}
-                onClick={this.toggle}
-                icon={faHeart}
-            />
-        </div>
+            <div className='logo' >
+                <Overlay
+                    style={{backgroundColor: 'white'}}
+                    ref={(overlay) => this.overlay = overlay}
+                    show={!this.props.showSidebar} target={() => this.target}
+                    placement="right">
+                    <Tooltip
+                        id="overload-bottom">
+                        Check it out!
+                    </Tooltip>
+                </Overlay>
+                <a ref={text => {
+                    this.target = text;
+                }} onClick={this.toggle}>LOGO</a>
+            </div>
         <nav>
           <ul>
             <li className='first'>

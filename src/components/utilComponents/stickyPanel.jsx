@@ -1,11 +1,21 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { SocialIcon } from 'react-social-icons';
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { changeState } from '../../actions/panelStateAction';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronCircleUp, faChevronCircleDown } from '@fortawesome/free-solid-svg-icons';
+//
 // component
-class StickyPanel extends Component {
+class StickyPanel extends PureComponent {
+  handleClick () {
+    this.props.changeState(!this.props.showPanel);
+  }
+
   render () {
     return (
-      <div className='stickyPanel'>
+      <div className={this.props.showPanel ? 'stickyPanel' : 'stickyPanel-disabled'}>
+
         <div className='Icons'>
           <a className='first_f'>
             <SocialIcon
@@ -16,7 +26,12 @@ class StickyPanel extends Component {
               style={{ height: 55, width: 55 }}
             />
           </a>
-          <a>
+          <a className='middle'>
+            <FontAwesomeIcon
+              className='panelBtn'
+              onClick={() => this.handleClick()}
+              icon={this.props.showPanel ? faChevronCircleDown : faChevronCircleUp}
+            />
             <SocialIcon
               url='https://twitter.com/home?status=wow'
               id='twitter' network='twitter'
@@ -39,4 +54,15 @@ class StickyPanel extends Component {
   }
 }
 
-export default StickyPanel;
+function mapStateToProps (state) {
+  return {
+    showPanel: state.actions.showPanel
+  };
+}
+
+StickyPanel.propTypes = {
+  showPanel: PropTypes.bool.isRequired,
+  changeState: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps, { changeState })(StickyPanel);

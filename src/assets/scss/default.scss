@@ -9,12 +9,11 @@ header {
   background: black;
   color: wheat;
   height: 90px;
-
+  @include transition(2s ease-in-out);
 
   .logo {
     font-size: x-large;
     position: absolute;
-    margin-left: 10px;
     top: 50%;
     left: 15px;
     @include translateY(-50%);
@@ -62,7 +61,6 @@ body {
   background: lighten(wheat, 8%);
   color: darken(grey, 23%);
 
-
   .navList, .navList-disabled {
     position: fixed;
     position: -ms-device-fixed;
@@ -90,7 +88,6 @@ body {
 
     }
 
-
   .navList-disabled {
     color:transparent;
     @include transition(.3s ease-in-out);
@@ -117,7 +114,6 @@ body {
       font-size: 25px;
       margin-top: 0;
     }
-
 
     .btn {
       width: 175px;
@@ -270,7 +266,7 @@ body {
     }
   }
 
-  .stickyPanel {
+  .stickyPanel, .stickyPanel-disabled {
 
     position: sticky;
     position: -webkit-sticky;
@@ -281,8 +277,19 @@ body {
     background-color: transparentize(black, 0.25);
     color: wheat;
     border-bottom: 2px solid transparentize(wheat, 0.5) ;
+    @include transition(.5s ease-in-out);
 
-
+    .middle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .panelBtn {
+        position: absolute;
+        text-align: center;
+        margin-top: -1.5%;
+        color:red;
+      }
+    }
     .Icons {
       margin: 0 auto;
       padding-bottom: 9px;
@@ -309,6 +316,10 @@ body {
         }
       }
     }
+  }
+
+.stickyPanel-disabled {
+    bottom: -80px;
   }
 
 

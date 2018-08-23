@@ -15,7 +15,6 @@ class Sidebar extends PureComponent {
     return (
       <div
         className={this.props.showSidebar ? 'navList' : 'navList-disabled'}
-        ref={(navList) => this.navList = navList}
       >
         <ul style={{fontSize: '45px'}}>
           <li>

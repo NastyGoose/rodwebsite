@@ -18,9 +18,9 @@ import Sidebar from './components/utilComponents/sidebar.jsx';
 import Example from './components/pages/Testpage.jsx';
 
 // animations
-import TweenLite from 'gsap/TweenLite';
-import {Power2} from 'gsap';
+import {Power2, TweenLite} from 'gsap';
 import { Zoom } from 'react-preloaders';
+import { preventDefault } from './components/utilComponents/utilFunctions'
 
 // redux
 import { Provider } from 'react-redux';
@@ -35,16 +35,17 @@ class App extends PureComponent {
       delay: 4000,
       loading: true
     };
+    setTimeout(() => window.onwheel = null, this.state.delay + 1000);
   }
 
   componentDidMount () {
     this.scrollToTop();
+    window.onwheel = preventDefault;
   }
 
   scrollToTop () {
     const scrollAnimation = { scrollTop: document.body.scrollHeight };
     const scrollTop = 0;
-    const loading = this.state.loading;
 
     const tween = TweenLite.to(scrollAnimation, 5, {
       scrollTop: scrollTop,
@@ -53,7 +54,8 @@ class App extends PureComponent {
         window.scrollTo(0, scrollAnimation.scrollTop);
       }
     });
-    if (!loading) {
+
+    if (!this.state.loading) {
       window.addEventListener('mousewheel', function mouseHandler () {
         tween.kill();
         window.removeEventListener('mousewheel', mouseHandler, false);

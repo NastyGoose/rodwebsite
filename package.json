@@ -9,11 +9,9 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^1.1.4",
-    "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux": "^4.0.0"
   },
   "devDependencies": {
-    "enzyme-to-json": "^3.3.4",
     "@fortawesome/fontawesome-free": "^5.2.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
     "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
@@ -36,6 +34,7 @@
     "css-loader": "^1.0.0",
     "enzyme": "^3.4.3",
     "enzyme-adapter-react-16": "^1.2.0",
+    "enzyme-to-json": "^3.3.4",
     "eslint": "^5.3.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-config-standard-react": "^6.0.0",
@@ -65,6 +64,7 @@
     "jest": "^23.5.0",
     "less-loader": "^4.1.0",
     "lodash": "^4.17.10",
+    "moment": "^2.22.2",
     "node-sass": "^4.9.3",
     "prop-types": "^15.6.2",
     "react-bootstrap": "^0.32.1",
@@ -76,6 +76,8 @@
     "react-sticky": "^6.0.3",
     "react-test-renderer": "^16.4.2",
     "reactstrap": "^6.3.1",
+    "redux-thunk": "^2.3.0",
+    "regenerator-runtime": "^0.12.1",
     "sass-loader": "^7.1.0",
     "script-loader": "^0.7.2",
     "style-loader": "^0.22.1",
@@ -90,15 +92,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
+    "coverage": "jest --coverage",
     "eject": "react-scripts eject"
   },
   "jest": {
-    "transform": {
-      "^.+\\.(jsx|js)?$": "<rootDir>/node_modules/babel-jest"
-    },
     "setupFiles": [
-      "./testsSetup/shim.js",
-      "./testsSetup/setup.js"
+      "./jestSetup/shim.js",
+      "./jestSetup/setup.js"
     ],
     "coverageDirectory": "./coverage/",
     "collectCoverage": true

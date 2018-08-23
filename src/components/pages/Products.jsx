@@ -26,8 +26,14 @@ class Products extends PureComponent {
           <Card>
             <UncontrolledCarousel items={project.items} />
             <CardBody>
-              <CardTitle style={{ marginTop: '0' }}>{project.name}</CardTitle>
-              <CardText>{project.desc}</CardText>
+              <CardTitle
+                  style={{ marginTop: '0' }}
+              >
+                  {project.name}
+              </CardTitle>
+              <CardText>
+                  {project.desc}
+              </CardText>
               <Button
                   outline color='warning'
                   onClick={() => this.onOpenModal(project.addInfo)}
