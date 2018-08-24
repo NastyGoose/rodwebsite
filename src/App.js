@@ -15,8 +15,7 @@ import Homepage from './components/pages/Homepage.jsx';
 import Products from './components/pages/Products.jsx';
 import StickyPanel from './components/utilComponents/stickyPanel.jsx';
 import Sidebar from './components/utilComponents/sidebar.jsx';
-import Example from './components/pages/Testpage.jsx';
-
+import {Link, Checkbox} from './components/pages/Testpage.jsx';
 // animations
 import {Power2, TweenLite} from 'gsap';
 import { Zoom } from 'react-preloaders';
@@ -96,7 +95,8 @@ class App extends PureComponent {
 
               <Route
                 exact path='/Example'
-                component={Example}
+                component={Link}
+                //components={{body: Link, Checkbox}}
               />
 
               <StickyPanel />

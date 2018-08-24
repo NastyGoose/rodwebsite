@@ -46,7 +46,7 @@ class Header extends PureComponent {
               <Link to='/Products'>Products</Link>
             </li>
             <li className='last'>
-              <Link to='/Example'>Contacts</Link>
+              <Link to='/Example'>Testpage</Link>
             </li>
           </ul>
         </nav>

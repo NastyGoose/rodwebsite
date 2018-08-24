@@ -18,6 +18,10 @@ header {
     left: 15px;
     @include translateY(-50%);
 
+    &::selection {
+      color: transparent;
+    }
+
     &:hover {
       color: darkorange;
       @include transition(.2s ease-in-out)
