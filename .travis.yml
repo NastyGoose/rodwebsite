@@ -9,7 +9,6 @@ install:
 - npm install
 script:
 - npm test
-- npm run build
-- npm run coverage
+- CI=false npm run build
 on:
   branch: master

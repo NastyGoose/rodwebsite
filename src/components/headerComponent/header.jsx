@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
-import Redirect from 'react-router-dom/es/Redirect';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { changeState } from '../../actions/sidebarStateAction';
@@ -8,17 +7,23 @@ import { Overlay, Tooltip } from 'react-bootstrap';
 
 // component
 class Header extends PureComponent {
+   constructor() {
+     super();
+     this.state = {
+         showOverlay: true
+     }
+    }
+
   get path () {
     return this.props.path;
   }
 
   toggle = () => {
     this.props.changeState(!this.props.showSidebar);
-    console.log(this.overlay);
+    if (this.state.showOverlay) this.setState({showOverlay: false});
   };
 
   render () {
-
     return (
       <header>
         <Redirect to={this.path} />
@@ -26,11 +31,11 @@ class Header extends PureComponent {
                 <Overlay
                     style={{backgroundColor: 'white'}}
                     ref={(overlay) => this.overlay = overlay}
-                    show={!this.props.showSidebar} target={() => this.target}
+                    show={this.state.showOverlay}
+                    target={() => this.target}
                     placement="right">
-                    <Tooltip
-                        id="overload-bottom">
-                        Check it out!
+                    <Tooltip>
+                        {'<'}= Check it out!
                     </Tooltip>
                 </Overlay>
                 <a ref={text => {

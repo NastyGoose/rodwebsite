@@ -15,7 +15,7 @@ import Homepage from './components/pages/Homepage.jsx';
 import Products from './components/pages/Products.jsx';
 import StickyPanel from './components/utilComponents/stickyPanel.jsx';
 import Sidebar from './components/utilComponents/sidebar.jsx';
-import {Link, Checkbox} from './components/pages/Testpage.jsx';
+import {Link} from './components/pages/Testpage.jsx';
 // animations
 import {Power2, TweenLite} from 'gsap';
 import { Zoom } from 'react-preloaders';
@@ -23,22 +23,22 @@ import { preventDefault } from './components/utilComponents/utilFunctions'
 
 // redux
 import { Provider } from 'react-redux';
-import configureStore from './components/configureStore';
+import configureStore from './reducers/configureStore';
 
 const store = configureStore();
 
 class App extends PureComponent {
-  constructor (props) {
+  constructor () {
     super();
     this.state = {
-      delay: 4000,
+      delay: 2500,
       loading: true
     };
-    setTimeout(() => window.onwheel = null, this.state.delay + 1000);
+    setTimeout(() => window.onwheel = null, this.state.delay + 500);
   }
 
   componentDidMount () {
-    this.scrollToTop();
+    //this.scrollToTop();
     window.onwheel = preventDefault;
   }
 
