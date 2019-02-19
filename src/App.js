@@ -96,7 +96,6 @@ class App extends PureComponent {
               <Route
                 exact path='/Example'
                 component={Link}
-                //components={{body: Link, Checkbox}}
               />
 
               <StickyPanel />

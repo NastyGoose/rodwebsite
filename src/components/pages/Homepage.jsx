@@ -3,8 +3,7 @@ import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
 import Time from '../utilComponents/utilFunctions';
 //component
 
-const ipsum = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n' +
-        '\n';
+const ipsum = `Агрогородок "Василишки" - одна из крупнейших деревень района, насчитывает 12 улиц, протяженностью свыше 10 км., население более почти две тысячи человек. В Василишковском центре культуры и досуга к услугам посетителей - 8 кружков, любительское объединение "Спадчына", музыкальная школа, уютная библиотека с читальным залом, компьютерный кабинет. Работают участковая больница, амбулатория и аптека.`;
 
 const Banner = (props) =>(
     <div>
@@ -13,7 +12,7 @@ const Banner = (props) =>(
                 <main>
                     <nav />
                     <HeroBanner
-                         min={'-20%'}
+                        min={'-20%'}
                         max={'20%'}
                         image= {props.picture}
                     >
@@ -42,7 +41,7 @@ class Homepage extends PureComponent {
     constructor() {
         super();
         this.state = {
-            text: 'a good',
+            text: 'Хорошего',
             magicWord: '',
             today: Time.whatDayIsItToday(),
             greetingsTime: Time.whatTimeIsItNow(),
@@ -52,7 +51,7 @@ class Homepage extends PureComponent {
     }
 
     changeState = () => {
-        const magicWords = ['a blessed', 'fun', 'a terrific', 'an awesome', 'a good', 'a neat', 'beautiful', 'a cool', 'a nice'];
+        const magicWords = ['Хорошего', 'Прекрасного', 'Удачного', 'Веселого', 'Доброго', 'Захватывающего', 'Продуктивного'];
         let statement;
         do {
             let index = Math.floor(Math.random() * (magicWords.length));
@@ -93,43 +92,41 @@ class Homepage extends PureComponent {
 
     };
 
-    render()
-    {
-        const telling =
-            <h1>
-                At this website <strong>you</strong> can read some <strong>information</strong> about our projects, us or just checkout <strong>design</strong>.
-            </h1>;
+    render() {
+      const telling =
+        <h1>
+          На этом сайте <strong>вы</strong> можете <strong>заказать</strong> продукцию производимую ОАО <strong>"Василишки"</strong>.
+        </h1>;
 
-        const greetings =
-            <h1>
-                {this.state.greetingsTime} we are <strong>
-                    <mark className='BartMarker'>Bart!</mark>
-            </strong>
-            </h1>;
-
-        return (
+      const greetings =
+        <h1>
+          {this.state.greetingsTime} сайт предоставлен <strong>
+            <mark className='BartMarker'>ОАО "Василишки"</mark>
+        </strong>
+        </h1>;
+    return (
     <div>
         <Banner
             text={greetings}
-            picture= {require('../../assets/images/night-landscape.jpg')}
+            picture= {require('../../assets/images/field.jpg')}
         />
             <div
                 className='container-fluid'
                 style={{ height: '700px' }}>
                 <h1>
-                    About us:
+                    О нас:
                 </h1>
                 <div className='firstSpeech'>
                     <p className='firstLine'>
-                        Our <mark>shiny company</mark> specialize on making small projects.
+                        Этот <mark>сайт</mark> создан для заказа продукции у ОАО "Василишки".
                     </p>
                 <br/>
                     <p className='secondLine'>
-                        For now we already made one baggy RTS <mark>game</mark> and currently we are trying to make <br/>it better.
+                        Он создан в ходе произвостенной <mark>практики</mark>.
                     </p>
                 <br/>
                     <p className='thirdLine'>
-                        We really appreciate <mark>you</mark> being on this website and hope you're liking it!
+                        Сайт создан при помощи <mark>ReactJS</mark>.
                     </p>
                 </div>
             </div>
@@ -147,7 +144,9 @@ class Homepage extends PureComponent {
             </div>
             <div className='magicText'>
                 <h1>
-                    Have <strong style = {{color: 'chocolate'}}>{this.state.magicWord}</strong> {this.state.today}!
+                    Сегодня <strong style = {{color: 'chocolate'}}>{this.state.today}</strong>.
+                    <br />
+                    <strong style = {{color: 'chocolate'}}>{this.state.magicWord}</strong> дня!
                 </h1>
             </div>
         </div>

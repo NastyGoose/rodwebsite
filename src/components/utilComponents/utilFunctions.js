@@ -11,29 +11,29 @@ export default class Time extends Date {
 
   static  whatTimeIsItNow = () => {
     const time = new Date().getHours();
-    if (time >= 0 && time <= 5) return ('Good evening,');
-    if (time >= 6 && time <= 11) return ('Good morning,');
-    if (time >= 12 && time <= 16) return ('Good afternoon,');
-    if (time >= 17 && time <= 23) return ('Good evening,');
+    if (time >= 0 && time <= 5) return ('Доброй ночи,');
+    if (time >= 6 && time <= 11) return ('Доброе утро,');
+    if (time >= 12 && time <= 16) return ('Добрый день,');
+    if (time >= 17 && time <= 23) return ('Доброй вечер,');
     };
 
   static  whatDayIsItToday = () => {
     let today = new Date().getDay();
        switch (today) {
             case 1:
-                return ('monday');
+                return ('понедельник');
             case 2:
-                return ('tuesday');
+                return ('вторник');
             case 3:
-                return ('wednesday');
+                return ('среда');
             case 4:
-                return ('thursday');
+                return ('четверг');
             case 5:
-                return ('friday');
+                return ('пятница');
             case 6:
-                return ('saturday');
+                return ('суббота');
             case 0:
-                return ('sunday');
+                return ('воскресенье');
         }
     };
 

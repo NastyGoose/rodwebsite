@@ -9,9 +9,9 @@ class Footer extends PureComponent {
         <Button
           variant='outlined'
           className='contactBtn'
-          href='mailto:Staaalker@tut.by'
+          href='mailto:home@vasilishki.by'
         >
-              Contact us!
+              Связаться с нами!
         </Button>
       </footer>
     );

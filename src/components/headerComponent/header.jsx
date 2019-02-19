@@ -28,16 +28,16 @@ class Header extends PureComponent {
       <header>
         <Redirect to={this.path} />
             <div className='logo' >
-                <Overlay
+                {/* <Overlay
                     style={{backgroundColor: 'white'}}
                     ref={(overlay) => this.overlay = overlay}
                     show={this.state.showOverlay}
                     target={() => this.target}
                     placement="right">
                     <Tooltip>
-                        {'<'}= Check it out!
+                        {'<'}= Нажми!
                     </Tooltip>
-                </Overlay>
+                </Overlay> */}
                 <a ref={text => {
                     this.target = text;
                 }} onClick={this.toggle}>LOGO</a>
@@ -45,13 +45,13 @@ class Header extends PureComponent {
         <nav>
           <ul>
             <li className='first'>
-              <Link to='/'>Home</Link>
+              <Link to='/'>На главную</Link>
             </li>
             <li>
-              <Link to='/Products'>Products</Link>
+              |
             </li>
-            <li className='last'>
-              <Link to='/Example'>Testpage</Link>
+            <li>
+              <Link to='/Products'>Заказать продукцию</Link>
             </li>
           </ul>
         </nav>

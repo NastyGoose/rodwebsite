@@ -5,16 +5,30 @@ import { Card, CardText, CardBody,
 import Modal from 'react-responsive-modal';
 import PropTypes from "prop-types";
 import { changeState } from '../../actions/modalStatelAction';
+import Select from '../utilComponents/Select';
 
 class Products extends PureComponent {
 
-    onOpenModal = (addInfo) => {
-        this.props.changeState(addInfo);
-    };
+  state = {
+    goodsValue: '',
+    servicesValue: ''
+  }
 
-    onCloseModal = () => {
-        this.props.changeState('');
-    };
+  onChange = (e) => {
+    const {value, name} = e.target;
+  
+    this.setState({
+      [name]: value 
+    })
+  }
+
+  onOpenModal = (options, valueName) => {
+      this.props.changeState(options, valueName);
+  };
+
+  onCloseModal = () => {
+      this.props.changeState([], null);
+  };
 
   get list () {
     return this.props.projects.map((project) => {
@@ -25,7 +39,7 @@ class Products extends PureComponent {
         >
           <Card>
             <UncontrolledCarousel items={project.items} />
-            <CardBody>
+            <CardBody style={{maxHeight: '600px'}}>
               <CardTitle
                   style={{ marginTop: '0' }}
               >
@@ -36,9 +50,9 @@ class Products extends PureComponent {
               </CardText>
               <Button
                   outline color='warning'
-                  onClick={() => this.onOpenModal(project.addInfo)}
+                  onClick={() => this.onOpenModal(project.options, project.valueName)}
               >
-                  Learn more
+                  Подробнее
               </Button>
             </CardBody>
           </Card>
@@ -48,14 +62,37 @@ class Products extends PureComponent {
   }
 
   render () {
+    const label = 'Выберите что вам требуется'
+
     return (
       <div>
           <Modal
+              className="goods-modal"
               open={this.props.open}
               onClose={this.onCloseModal}
               center
+              styles={{modal: {
+                minWidth: '800px',
+                minHeight: '400px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between'}
+              }}
           >
-              {this.props.text}
+            <Select
+              value={this.state[this.props.valueName]}
+              label={label}
+              options={this.props.options}
+              name={this.props.valueName}
+              changeHandler={this.onChange}
+            />
+            <Button
+              className="submit-btn"
+              color="warning"
+              onClick={() => {}}
+            >
+              Заказать
+            </Button>
           </Modal>
           <ul className='reduxList'>
                   {this.list}
@@ -69,7 +106,8 @@ function mapStateToProps (state) {
   return {
     projects: state.projects,
     open: state.actions.isOpen,
-    text: state.actions.text
+    valueName: state.actions.valueName,
+    options: state.actions.options
   };
 }
 

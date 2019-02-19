@@ -41,7 +41,7 @@ class StickyPanel extends Component {
           </a>
           <a className='last_f'>
             <SocialIcon
-              url='https://vk.com/bloodforbloodgod'
+              url='https://vk.com/nadynika1'
               className='vk'
               network='vk'
               color='#faeed7'

@@ -60,10 +60,18 @@ header {
 }
 
 body {
+
   position: relative;
   overflow: visible !important;
   background: lighten(wheat, 8%);
   color: darken(grey, 23%);
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    align-items: center;
+  }
 
   .navList, .navList-disabled {
     position: fixed;

@@ -1,8 +1,11 @@
 export const IS_OPEN = 'IS_OPEN';
 
-export const changeState = (text) => dispatch => {
+export const changeState = (options, valueName) => dispatch => {
   dispatch({
     type: 'IS_OPEN',
-    payload: text
+    payload: {
+      options,
+      valueName
+    }
   });
 };

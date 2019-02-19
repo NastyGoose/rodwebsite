@@ -19,8 +19,9 @@ export default (state = initialState, action) => {
     case IS_OPEN:
       return {
         ...state,
-        isOpen: !!action.payload.length,
-        text: action.payload
+        isOpen: !(action.payload.valueName === null),
+        valueName: action.payload.valueName,
+        options: action.payload.options
       };
     case SHOW_SIDEBAR:
       return {
