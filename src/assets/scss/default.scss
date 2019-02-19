@@ -66,6 +66,12 @@ body {
   background: lighten(wheat, 8%);
   color: darken(grey, 23%);
 
+  .magicText {
+    h1 {
+      margin-top: 10px !important;
+    }
+  }
+
   .form-group {
     display: flex;
     flex-direction: column;

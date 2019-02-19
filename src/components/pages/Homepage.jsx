@@ -145,7 +145,8 @@ class Homepage extends PureComponent {
             <div className='magicText'>
                 <h1>
                     Сегодня <strong style = {{color: 'chocolate'}}>{this.state.today}</strong>.
-                    <br />
+                </h1>
+                <h1 style = {{marginTop: '10px !important'}}>
                     <strong style = {{color: 'chocolate'}}>{this.state.magicWord}</strong> дня!
                 </h1>
             </div>

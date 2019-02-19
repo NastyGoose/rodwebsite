@@ -9,6 +9,9 @@
 # production
 /build
 
+# webpack build
+/public
+
 # IDE
 /.idea
 
