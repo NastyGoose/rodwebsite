@@ -6,7 +6,7 @@ export default class ControlledInput extends Component {
     const {options} = this.props;
 
     return options.map((item) => (
-      <option value={item}>{item}</option>
+      <option desc={item.description} value={item.name}>{item.name}</option>
     ));
   }
 

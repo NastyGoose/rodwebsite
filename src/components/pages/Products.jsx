@@ -4,6 +4,8 @@ import { Card, CardText, CardBody,
   CardTitle, Button, UncontrolledCarousel} from 'reactstrap';
 import Modal from 'react-responsive-modal';
 import PropTypes from "prop-types";
+import axios from 'axios';
+import isEmpty from 'lodash/isEmpty';
 import { changeState } from '../../actions/modalStatelAction';
 import Select from '../utilComponents/Select';
 
@@ -16,19 +18,45 @@ class Products extends PureComponent {
 
   onChange = (e) => {
     const {value, name} = e.target;
-  
+
     this.setState({
       [name]: value 
     })
   }
 
   onOpenModal = (options, valueName) => {
-      this.props.changeState(options, valueName);
+    this.props.changeState(options, valueName);
   };
 
   onCloseModal = () => {
-      this.props.changeState([], null);
+    this.props.changeState([], null);
   };
+
+  addOrder = (valueName) => {
+    const {options} = this.props;
+    const info = options.filter((item) => {
+      if (item.name === this.state[valueName]) {
+        return item;
+      }
+    })[0];
+
+    axios.post('http://localhost:8080/database/addOrder', {
+      "Type": valueName === "servicesValue" ? "Услуга" : "Продукция",
+      "Name": this.state[valueName],
+      "Description": !isEmpty(info) ? info.description : options[0].description,
+      "Price": !isEmpty(info) ? info.price : options[0].price
+    })
+    .then(res => {
+      console.log(res);
+      this.props.changeState([], null);
+      alert('Заказ успешно добавлен!');
+    })
+    .catch(err => {
+      console.log(err);
+      this.props.changeState([], null);
+      alert('При добавлении заказа произошла ошибка.');
+    })
+  }
 
   get list () {
     return this.props.projects.map((project) => {
@@ -89,7 +117,7 @@ class Products extends PureComponent {
             <Button
               className="submit-btn"
               color="warning"
-              onClick={() => {}}
+              onClick={() => this.addOrder(this.props.valueName)}
             >
               Заказать
             </Button>
