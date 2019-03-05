@@ -1,4 +1,6 @@
+// eslint-disable
 import React, { Component } from "react";
+import {withRouter} from 'react-router';
 import {
   HelpBlock,
   FormGroup,
@@ -8,8 +10,7 @@ import {
 import LoaderButton from "./LoaderButton";
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { changeState } from '../../actions/sidebarStateAction';
-
+import { setUser } from '../../actions/sidebarStateAction';
 
 class Signup extends Component {
   constructor(props) {
@@ -57,7 +58,15 @@ class Signup extends Component {
     })
     .then(res => {
       console.log(res);
-      alert('Регистрация успешно завершена!');
+      if (res.data.success) {
+        alert('Регистрация успешно завершена!');
+        this.props.setUser({
+          email
+        })
+        this.props.history.push('/');
+      } else {
+        alert('Пользователь уже существует');
+      }
     })
     .catch(err => {
       console.log(err);
@@ -115,6 +124,7 @@ class Signup extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="Signup">
         {this.state.newUser === null
@@ -133,4 +143,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps, { changeState })(Signup);
+export default withRouter(connect(mapStateToProps, { setUser })(Signup));

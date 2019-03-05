@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import axios from 'axios';
+import {withRouter} from 'react-router';
+import { connect } from 'react-redux';
+import { setUser } from '../../actions/sidebarStateAction';
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -21,8 +25,38 @@ export default class Login extends Component {
     });
   }
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
+
+    this.setState({ isLoading: true });
+    const email = event.target.elements.email.value;
+    const password = event.target.elements.password.value;
+
+    axios.post('http://localhost:8080/api/account/signin', {
+      login: email,
+      password,
+      email
+    })
+    .then(res => {
+      console.log(res);
+      if (res.data.success) {
+        alert('Успех!');
+        this.props.setUser({
+          login: email,
+          email,
+          password
+        })
+        this.props.history.push('/');
+        } else {
+        alert('Хуйня какая то миша давай по новой');
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      alert('При регистрации произошла ошибка.');
+    })
+
+    this.setState({ isLoading: false });
   }
 
   render() {
@@ -59,3 +93,13 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    path: state.actions.path,
+    showSidebar: state.actions.showSidebar,
+    isSignedIn: state.actions.isSignedIn
+  };
+}
+
+export default connect(mapStateToProps, { setUser })(withRouter(Login));

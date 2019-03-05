@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { changeState } from '../../actions/sidebarStateAction';
+import { changeState, logout } from '../../actions/sidebarStateAction';
 
 // component
 class Header extends PureComponent {
@@ -22,6 +22,10 @@ class Header extends PureComponent {
     if (this.state.showOverlay) this.setState({showOverlay: false});
   };
 
+  logout = () => {
+    this.props.logout();
+  }
+
   render () {
     const isAuth = localStorage.getItem('jwtToken');
     console.log(isAuth);
@@ -33,6 +37,11 @@ class Header extends PureComponent {
                     this.target = text;
                 }} onClick={this.toggle}>LOGO</a>
             </div>
+        {this.props.isSignedIn ? <div className='logo2' >
+                <a ref={text => {
+                    this.target = text;
+                }} onClick={this.logout}>Выйти</a>
+            </div> :
         <nav>
           <ul>
             <li className='first'>
@@ -51,7 +60,7 @@ class Header extends PureComponent {
               <Link to='/Example'>Вход</Link>
             </li>
           </ul>
-        </nav>
+        </nav>}
       </header>
     );
   }
@@ -71,4 +80,4 @@ Header.propTypes = {
   path: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps, { changeState })(Header);
+export default connect(mapStateToProps, { changeState, logout })(Header);

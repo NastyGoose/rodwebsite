@@ -63,6 +63,24 @@ header {
     }
   }
 
+  .logo2 {
+    font-size: x-large;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    @include translateY(-50%);
+
+    &::selection {
+      color: transparent;
+    }
+
+    &:hover {
+      color: darkorange;
+      @include transition(.2s ease-in-out)
+
+    }
+  }
+
   nav,
   nav ul,
   nav ul li {
@@ -283,7 +301,7 @@ body {
     div {
       margin-left: 150px;
       margin-right: 150px;
-      margin-top: 6%;
+      margin-top: 0;
       height: fit-content;
       display: block;
 

@@ -1,12 +1,17 @@
-import { SET_PATH, IS_SIGNED_IN } from './setPathAction';
+import { SET_PATH } from './setPathAction';
 import { IS_OPEN } from './modalStatelAction';
-import {SHOW_SIDEBAR} from './sidebarStateAction';
+import {SHOW_SIDEBAR, SET_USER, LOGOUT} from './sidebarStateAction';
 import {SHOW_PANEL} from './panelStateAction';
 
 const initialState = {
   isOpen: false,
   showSidebar: false,
-  showPanel: false
+  showPanel: false,
+  email: {
+    email: '',
+    login: '',
+    password: ''
+  }
 };
 
 export default (state = initialState, action) => {
@@ -33,12 +38,17 @@ export default (state = initialState, action) => {
         ...state,
         showPanel: action.payload
       };
-    case IS_SIGNED_IN: 
+    case SET_USER:
       return {
         ...state,
         isSignedIn: true,
         email: action.payload
-      }
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        isSignedIn: false
+      };
     default:
       return state;
   }
