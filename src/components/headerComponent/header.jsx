@@ -3,7 +3,6 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { changeState } from '../../actions/sidebarStateAction';
-import { Overlay, Tooltip } from 'react-bootstrap';
 
 // component
 class Header extends PureComponent {
@@ -24,20 +23,12 @@ class Header extends PureComponent {
   };
 
   render () {
+    const isAuth = localStorage.getItem('jwtToken');
+    console.log(isAuth);
     return (
       <header>
         <Redirect to={this.path} />
             <div className='logo' >
-                {/* <Overlay
-                    style={{backgroundColor: 'white'}}
-                    ref={(overlay) => this.overlay = overlay}
-                    show={this.state.showOverlay}
-                    target={() => this.target}
-                    placement="right">
-                    <Tooltip>
-                        {'<'}= Нажми!
-                    </Tooltip>
-                </Overlay> */}
                 <a ref={text => {
                     this.target = text;
                 }} onClick={this.toggle}>LOGO</a>
@@ -51,7 +42,13 @@ class Header extends PureComponent {
               |
             </li>
             <li>
-              <Link to='/Products'>Заказать продукцию</Link>
+              <Link to='/Products'>Регистрация</Link>
+            </li>
+            <li>
+              |
+            </li>
+            <li>
+              <Link to='/Example'>Вход</Link>
             </li>
           </ul>
         </nav>
@@ -63,7 +60,8 @@ class Header extends PureComponent {
 function mapStateToProps (state) {
   return {
     path: state.actions.path,
-    showSidebar: state.actions.showSidebar
+    showSidebar: state.actions.showSidebar,
+    isSignedIn: state.actions.isSignedIn
   };
 }
 

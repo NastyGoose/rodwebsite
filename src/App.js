@@ -15,7 +15,7 @@ import Homepage from './components/pages/Homepage.jsx';
 import Products from './components/pages/Products.jsx';
 import StickyPanel from './components/utilComponents/stickyPanel.jsx';
 import Sidebar from './components/utilComponents/sidebar.jsx';
-import {Link} from './components/pages/Testpage.jsx';
+import Link from './components/pages/Testpage.jsx';
 // animations
 import {Power2, TweenLite} from 'gsap';
 import { Zoom } from 'react-preloaders';
@@ -38,7 +38,6 @@ class App extends PureComponent {
   }
 
   componentDidMount () {
-    //this.scrollToTop();
     window.onwheel = preventDefault;
   }
 
@@ -66,20 +65,15 @@ class App extends PureComponent {
     return (
       <Provider store={store}>
         <body>
-
           <Zoom
             color={'#fffad3'}
             bgColor={'rgb(0, 0, 0, .80)'}
             time={this.state.delay}
           />
-
           <Router>
             <div className='App'>
-
               <Header />
-
               <Sidebar />
-
               <Route path='/(home|)/'
                 component={Homepage}
               />
@@ -87,25 +81,16 @@ class App extends PureComponent {
                 exact path='/Homepage'
                 component={Homepage}
               />
-
               <Route
                 exact path='/Products'
                 component={Products}
               />
-
               <Route
                 exact path='/Example'
                 component={Link}
               />
-
-              <StickyPanel />
-
-              <Footer ref={(ct) => { this.contacts = ct; }} />
-
             </div>
-
           </Router>
-
         </body>
       </Provider>
     );

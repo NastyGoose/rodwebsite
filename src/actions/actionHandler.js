@@ -1,4 +1,4 @@
-import { SET_PATH } from './setPathAction';
+import { SET_PATH, IS_SIGNED_IN } from './setPathAction';
 import { IS_OPEN } from './modalStatelAction';
 import {SHOW_SIDEBAR} from './sidebarStateAction';
 import {SHOW_PANEL} from './panelStateAction';
@@ -33,6 +33,12 @@ export default (state = initialState, action) => {
         ...state,
         showPanel: action.payload
       };
+    case IS_SIGNED_IN: 
+      return {
+        ...state,
+        isSignedIn: true,
+        email: action.payload
+      }
     default:
       return state;
   }

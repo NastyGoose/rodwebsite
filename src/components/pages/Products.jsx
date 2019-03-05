@@ -1,147 +1,136 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Card, CardText, CardBody,
-  CardTitle, Button, UncontrolledCarousel} from 'reactstrap';
-import Modal from 'react-responsive-modal';
-import PropTypes from "prop-types";
+import React, { Component } from "react";
+import {
+  HelpBlock,
+  FormGroup,
+  FormControl,
+  ControlLabel
+} from "react-bootstrap";
+import LoaderButton from "./LoaderButton";
 import axios from 'axios';
-import isEmpty from 'lodash/isEmpty';
-import { changeState } from '../../actions/modalStatelAction';
-import Select from '../utilComponents/Select';
+import { connect } from 'react-redux';
+import { changeState } from '../../actions/sidebarStateAction';
 
-class Products extends PureComponent {
 
-  state = {
-    goodsValue: '',
-    servicesValue: ''
+class Signup extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoading: false,
+      email: "",
+      password: "",
+      confirmPassword: "",
+      confirmationCode: "",
+      newUser: null
+    };
   }
 
-  onChange = (e) => {
-    const {value, name} = e.target;
+  validateForm() {
+    return (
+      this.state.email.length > 0 &&
+      this.state.password.length > 0 &&
+      this.state.password === this.state.confirmPassword
+    );
+  }
 
+  validateConfirmationForm() {
+    return this.state.confirmationCode.length > 0;
+  }
+
+  handleChange = event => {
     this.setState({
-      [name]: value 
-    })
-  }
-
-  onOpenModal = (options, valueName) => {
-    this.props.changeState(options, valueName);
-  };
-
-  onCloseModal = () => {
-    this.props.changeState([], null);
-  };
-
-  addOrder = (valueName) => {
-    const {options} = this.props;
-    const info = options.filter((item) => {
-      if (item.name === this.state[valueName]) {
-        return item;
-      }
-    })[0];
-
-    axios.post('http://localhost:8080/database/addOrder', {
-      "Type": valueName === "servicesValue" ? "Услуга" : "Продукция",
-      "Name": this.state[valueName],
-      "Description": !isEmpty(info) ? info.description : options[0].description,
-      "Price": !isEmpty(info) ? info.price : options[0].price
-    })
-    .then(res => {
-      console.log(res);
-      this.props.changeState([], null);
-      alert('Заказ успешно добавлен!');
-    })
-    .catch(err => {
-      console.log(err);
-      this.props.changeState([], null);
-      alert('При добавлении заказа произошла ошибка.');
-    })
-  }
-
-  get list () {
-    return this.props.projects.map((project) => {
-      return (
-        <li
-            className='reduxListItem'
-            key={project.id}
-        >
-          <Card>
-            <UncontrolledCarousel items={project.items} />
-            <CardBody style={{maxHeight: '600px'}}>
-              <CardTitle
-                  style={{ marginTop: '0' }}
-              >
-                  {project.name}
-              </CardTitle>
-              <CardText>
-                  {project.desc}
-              </CardText>
-              <Button
-                  outline color='warning'
-                  onClick={() => this.onOpenModal(project.options, project.valueName)}
-              >
-                  Подробнее
-              </Button>
-            </CardBody>
-          </Card>
-        </li>
-      );
+      [event.target.id]: event.target.value
     });
   }
 
-  render () {
-    const label = 'Выберите что вам требуется'
+  handleSubmit = async event => {
+    event.preventDefault();
 
+    this.setState({ isLoading: true });
+    const email = event.target.elements.email.value;
+    const password = event.target.elements.password.value;
+
+    axios.post('http://localhost:8080/api/account/signup', {
+      login: email,
+      password,
+      email
+    })
+    .then(res => {
+      console.log(res);
+      alert('Регистрация успешно завершена!');
+    })
+    .catch(err => {
+      console.log(err);
+      alert('При регистрации произошла ошибка.');
+    })
+
+    this.setState({ isLoading: false });
+  }
+
+  handleConfirmationSubmit = async event => {
+    event.preventDefault();
+
+    this.setState({ isLoading: true });
+  }
+
+  renderForm() {
     return (
-      <div>
-          <Modal
-              className="goods-modal"
-              open={this.props.open}
-              onClose={this.onCloseModal}
-              center
-              styles={{modal: {
-                minWidth: '800px',
-                minHeight: '400px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between'}
-              }}
-          >
-            <Select
-              value={this.state[this.props.valueName]}
-              label={label}
-              options={this.props.options}
-              name={this.props.valueName}
-              changeHandler={this.onChange}
-            />
-            <Button
-              className="submit-btn"
-              color="warning"
-              onClick={() => this.addOrder(this.props.valueName)}
-            >
-              Заказать
-            </Button>
-          </Modal>
-          <ul className='reduxList'>
-                  {this.list}
-          </ul>
+      <form onSubmit={this.handleSubmit}>
+        <FormGroup controlId="email" bsSize="large">
+          <ControlLabel>Email</ControlLabel>
+          <FormControl
+            autoFocus
+            type="email"
+            value={this.state.email}
+            onChange={this.handleChange}
+          />
+        </FormGroup>
+        <FormGroup controlId="password" bsSize="large">
+          <ControlLabel>Password</ControlLabel>
+          <FormControl
+            value={this.state.password}
+            onChange={this.handleChange}
+            type="password"
+          />
+        </FormGroup>
+        <FormGroup controlId="confirmPassword" bsSize="large">
+          <ControlLabel>Confirm Password</ControlLabel>
+          <FormControl
+            value={this.state.confirmPassword}
+            onChange={this.handleChange}
+            type="password"
+          />
+        </FormGroup>
+        <LoaderButton
+          block
+          bsSize="large"
+          disabled={!this.validateForm()}
+          type="submit"
+          isLoading={this.state.isLoading}
+          text="Signup"
+          loadingText="Signing up…"
+        />
+      </form>
+    );
+  }
+
+  render() {
+    return (
+      <div className="Signup">
+        {this.state.newUser === null
+          ? this.renderForm()
+          : this.renderConfirmationForm()}
       </div>
     );
   }
 }
 
-function mapStateToProps (state) {
+const mapStateToProps = (state) => {
   return {
-    projects: state.projects,
-    open: state.actions.isOpen,
-    valueName: state.actions.valueName,
-    options: state.actions.options
+    path: state.actions.path,
+    showSidebar: state.actions.showSidebar,
+    isSignedIn: state.actions.isSignedIn
   };
 }
 
-Products.propTypes = {
-    text: PropTypes.string.isRequired,
-    changeState: PropTypes.func.isRequired
-};
-
-export default connect(mapStateToProps, { changeState })(Products);
+export default connect(mapStateToProps, { changeState })(Signup);
